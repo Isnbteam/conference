@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
+from app import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^logout/', views.logout),
+    url(r'^login/', views.login),
+    url(r'^conference/(?P<conference_id>\d+)', views.conference_detail),
+    url(r'^conference/$', views.conference),
+    url(r'^add_confer/$', views.add_conference),
+    url(r'^edit_conference/(?P<conference_id>\d+)/', views.edit_conference),
+    url(r'^del_conference/(?P<conference_id>\d+)/', views.del_conference),
 ]

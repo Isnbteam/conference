@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <title>会议室列表</title>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+     <strong>会议室管理</strong>
+      </a>
+    </div>
+       <ul class="nav navbar-nav navbar-right">
+            <li><a>{{ request.session.user.user }}</a></li>
+             <li><a href="/logout/">注销</a></li>
+         </ul>
+  </div>
+</nav>
+{% block container%}<div class="container">
+    <div>
+         {% if request.session.user.is_super%}
+         <a href="/add_confer/"><button class="btn-info btn pull-right">添加</button></a>
+        {% endif %}
+    </div>
+    <table class="table-hover table-border table">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>会议室名称</th>
+            <th>位置</th>
+            <th>会议室容纳人数</th>
+            <th>查看</th>
+            {% if request.session.user.is_super%}
+            <th>操作</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for obj in conference_list %}
+        <tr>
+        <td>{{ obj.id }}</td>
+        <td>{{ obj.title }}</td>
+        <td>{{ obj.position }}</td>
+        <td>{{ obj.nunm }}</td>
+        <td><a href="/conference/{{ obj.id }}">查看</a></td>
+             {% if request.session.user.is_super%}
+        <td>
+            <a href="/del_conference/{{ obj.id }}"><button class="btn-danger btn">删除</button></a>
+            <a href="/edit_conference/{{ obj.id }}/"><button class="btn-success btn">编辑</button></a>
+        </td>
+        {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>{% endblock %}
+</body>
+</html>

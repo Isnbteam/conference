@@ -7,6 +7,7 @@ class Userinfo(models.Model):
     """
     username=models.CharField(max_length=32)
     password=models.CharField(max_length=32)
+    is_super=models.IntegerField(null=True,blank=True,verbose_name="是否是管理员")
     class Meta:
         verbose_name_plural="用户表"
     def __str__(self):
@@ -15,8 +16,9 @@ class Confernce(models.Model):
     """
     会议室表
     """
-    title=models.CharField(max_length=32)
+    title=models.CharField(max_length=32,verbose_name="会议室名称")
     nunm=models.IntegerField(verbose_name="容纳人数")
+    position=models.CharField(max_length=64,verbose_name="位置",default=None,null=True,blank=True)
     class Meta:
         verbose_name_plural="会议室"
     def __str__(self):

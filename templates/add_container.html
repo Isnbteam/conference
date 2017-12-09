@@ -1,0 +1,26 @@
+{% extends "conference_all.html" %}
+{% block container %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group ">
+                        <label class="control-label">会议室名称：</label>
+                            {{ form.title }}
+                    </div><div class="form-group ">
+                        <label class="control-label">位置：</label>
+                            {{ form.position }}
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">会议室容纳人数：</label>
+                        <span style="color: #9d0000">{{ form.errors.nunm.0 }}</span>
+                            {{ form.nunm }}
+                    </div>
+                    <button type="submit" class="btn btn-info">保存</button>
+                    <button type="reset" class="btn btn-warning">重置</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock container %}
